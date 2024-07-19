@@ -1,7 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Banner.css'
 import bannerLarge from '../../../assets/banners/banner1900.png'
-import bannerMedium from '../../../assets/banners/banner1200.png'
 import bannerSmall from '../../../assets/banners/banner1080.png'
 
 
