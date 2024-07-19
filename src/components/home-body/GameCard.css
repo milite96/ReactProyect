@@ -12,22 +12,29 @@
   width: 100%;
   max-width: 400px;
   max-height: 420px;
-  /* padding: 2%; */
-  /* padding-top: 5%; */
   padding-bottom: 3%;
   overflow: hidden;
+  /* padding: 2%; */
+  /* padding-top: 5%; */
   /* box-shadow: 0 0 0 1px var(--fern-green) */
   
 }
+
 .game-card-style .img-container {
   margin: 0;
   width: 100%;
-  height: auto;
+  height: 400px;
+  overflow: hidden;
 }
 
 .game-card-style .img-container img{
   width: 100%;
   height: 100%;
+  transition: all ease-in-out 0.3s;
+}
+
+.game-card-style .img-container img:hover{
+transform: scale(1.2);
 }
 
 .game-card-content{

@@ -88,6 +88,13 @@
     background-color: var(--light-green);
     color: var(--davys-gray);
     font-weight: 600;
+    border: none;
+    border-radius: 0.4rem;
+}
+
+.page-btn:hover {
+    background-color: var(--moss-green);
+    color: white;
 }
 
 .game-card {
