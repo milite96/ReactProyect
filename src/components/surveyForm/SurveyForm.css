@@ -4,6 +4,21 @@
     margin-top:104px;
 }
 
+
+.sv-header__title{
+
+}
+
+.sv-header__description{
+
+}
+
+.sd-logo__image{
+width: auto;
+margin: 1rem;
+}
+
+
 .sd-selectbase{
     display: flex;
     flex-direction: column;
@@ -18,3 +33,27 @@
 .survey-result{
     color: white;
 }
+
+
+/* Tablet view */
+@media (max-width: 1340px) {
+
+    .sv-header__cell-content{
+        max-width: 700px;
+       }
+}
+
+@media (max-width: 1090px) {
+
+    .sv-header__cell-content{
+        max-width: 600px;
+       }
+}
+
+@media (max-width: 960px) {
+
+    .sv-header__cell-content{
+        max-width: 500px;
+       }
+}
+

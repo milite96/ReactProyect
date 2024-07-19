@@ -22,34 +22,36 @@ function MostPopular() {
     <div className="most-div-wrapper">
       <h1 className="most-title">Most popular Free-to-Play Games</h1>
 
-      <CardGroup className="most-card-group">
-        {relevantGames &&
-          relevantGames.map((game) => (
-            <Card className="most-card" key={game.id}>
-              <Card.Img
-                variant="top"
-                src={game.thumbnail}
-              />
-              <Card.Body>
-                <Card.Title className="most-card-title">{game.title}</Card.Title>
-                <Card.Text className="most-card-text">{game.short_description} </Card.Text>
-              </Card.Body>
-              <div className="most-div-flex">
-                  <button
-                    className="most-see-more-btn"
-                    onClick={() => window.open(game.game_url)}
-                  >
-                    See more
-                  </button>
-                </div>
-              <Card.Footer>
-                <small className="most-text-muted">
-                  Release date: {game.release_date}
-                </small>
-              </Card.Footer>
-            </Card>
-          ))}
-      </CardGroup>
+      <div className="most-card-group-wrapper">
+        <CardGroup className="most-card-group">
+          {relevantGames &&
+            relevantGames.map((game) => (
+              <Card className="most-card" key={game.id}>
+                <Card.Img
+                  variant="top"
+                  src={game.thumbnail}
+                />
+                <Card.Body>
+                  <Card.Title className="most-card-title">{game.title}</Card.Title>
+                  <Card.Text className="most-card-text">{game.short_description} </Card.Text>
+                </Card.Body>
+                <div className="most-div-flex">
+                    <button
+                      className="most-see-more-btn"
+                      onClick={() => window.open(game.game_url)}
+                    >
+                      See more
+                    </button>
+                  </div>
+                <Card.Footer>
+                  <small className="most-text-muted">
+                    Release date: {game.release_date}
+                  </small>
+                </Card.Footer>
+              </Card>
+            ))}
+        </CardGroup>
+      </div>
 
       {error && <p>Error:{error.message}</p>}
       {isLoading && <p>Loading...</p>}

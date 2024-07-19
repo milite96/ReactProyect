@@ -74,8 +74,15 @@
 
 /* Tablet view */
 @media (max-width: 1010px) {
+    .most-title {
+        display: flex;
+        justify-content: center;
+    }
+
     .most-card-group {
         gap: 1rem;
+        width: auto;
+        margin: 1rem 2rem;
     }
 
     .most-card {
@@ -86,13 +93,24 @@
 }
 
 /* Mobile view */
-@media (max-width: 576px) {
+@media (max-width: 600px) {
+
+    .most-card-group-wrapper{
+        display: flex;
+        justify-content: center;
+    }
+    .most-title {
+        display: flex;
+        justify-content: center;
+    }
     .most-card-group {
         gap: 0.5rem;
+        width: auto;
+        margin: 1rem 4rem;
     }
 
     .most-card {
-        flex: 1 1 calc(100% - 2rem) !important;
+        flex: 1 1 calc(100% - 2rem) !important; /* 2 columns */
         /* 1 column */
     }
 }

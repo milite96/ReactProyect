@@ -1,20 +1,20 @@
 import useSWR from "swr"
 
 const fetcher = (url)=>fetch(url).then(resp => resp.json()).then(
-  response=>{ 
+  response=>{
     console.log(response.results)
     return response.results
  }
 )
 
 function useFetch() {
-    const apiKey = "49bd95d6269340dea9cb5577a90a17d7" // cada uno debe poner su api key aqui
+    const apiKey = "" // cada uno debe poner su api key aqui
     const routeLink = "games"  // esta es la ruta que queramos emplear para la api
     const gameSearch = "Mario"
     const pageSize = "3"
-    
+
     const {data, error, isLoading} = useSWR(`https://api.rawg.io/api/${routeLink}?key=${apiKey}&search=${gameSearch}&page_size=${pageSize}`, fetcher)
-    
+
     //https://api.rawg.io/api/games?key=123456&search=Mario&page_size=3
 
     // const {data, error, isLoading} = useSWR(`https://api.rawg.io/api/${link}?key=${apiKey}&search=Mario&page_size=41`, fetcher)
