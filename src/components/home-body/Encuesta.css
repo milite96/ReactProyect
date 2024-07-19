@@ -3,9 +3,11 @@
 
 .encuesta-container {
     background-color:  var(--fern-green);
-    height: 160px;
+    min-height: 160px;
+    height: auto;
     text-align: center;
-    padding-top: 1rem;
+    padding: 1rem 0;
+    color: white;
   }
 
   .btn-link-pages {
