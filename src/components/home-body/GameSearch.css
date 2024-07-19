@@ -58,6 +58,38 @@
     background-color: var(--moss-green);
     color: white;
 }
+
+.game-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: max-content;
+    border-radius: 20px;
+
+}
+
+.no-found {
+    font-size: 25px;
+    padding: 1rem;
+    color: white;
+    margin-bottom: 3rem;
+}
+
+.page-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+}
+
+.page-btn {
+    width: 30px;
+    background-color: var(--light-green);
+    color: var(--davys-gray);
+    font-weight: 600;
+}
+
 .game-card {
     display: grid;
     grid-template-columns: repeat(4, 1fr);

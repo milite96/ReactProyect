@@ -52,8 +52,8 @@
 }
 
 .card-title h2 {
-  font-weight: 800;
-  font-size: 30px;
+  font-weight: 900;
+  font-size: 26px;
   margin: 0;
   text-align: center;
 }
@@ -63,15 +63,15 @@
   width: 100%;
   height: auto;
   min-height: 70px;
-  padding: 0 1rem;
+  padding: 0 0.5rem;
   justify-content: center;
   align-items: center;
   margin-bottom: 0.5rem;
 }
 
 .game-card-description p{
-  font-weight: 600;
-  font-size: 1rem;
+  font-weight: 700;
+  font-size: 0.9rem;
   text-align: center;
 }
 
