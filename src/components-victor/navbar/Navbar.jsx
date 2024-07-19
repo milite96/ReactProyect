@@ -10,7 +10,7 @@ const navbarDropdown = [
   },
   {
     item: "Game finder",
-    href: "/game-finder"
+    href: "/survey"
   },
   {
     item: "Coming soon",
@@ -29,14 +29,14 @@ function Navbar() {
     <nav className="navbar">
       <div className='no-list-style'>
         <div className="navbar-brand">
-          <a href="#"><img src="./src/assets/logos/logoSVG.svg" width={150} alt="logo" /></a>
+          <a href="/"><img src="./src/assets/logos/logoSVG.svg" width={150} alt="logo" /></a>
         </div>
         <div className="navbar-dropdown">
         <BasicDropdown btnName={"Links"} objectsArray={navbarDropdown} />
         </div>
         <div className='links'>
           <li className="navbar-item"><a href="/">Home</a></li>
-          <li className="navbar-item"><a href="/game-finder">Game finder</a></li>
+          <li className="navbar-item"><a href="/survey">Game finder</a></li>
         </div>
       </div>
 

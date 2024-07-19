@@ -1,6 +1,5 @@
 @import url("../../index.css");
 
-
 .search-title {
     justify-self: left;
     color: var(--light-green);
@@ -25,7 +24,7 @@
     gap: 1rem;
 }
 
-.btn-wrapper{
+.btn-wrapper {
     display: flex;
     gap: 0.5rem
 }
@@ -38,7 +37,7 @@
     color: white;
     border-radius: 0.5rem;
     padding-left: 1rem;
-
+    border: none;
 }
 
 .dropdown-button {
@@ -52,6 +51,7 @@
     padding: 6px 20px;
     border-radius: 0.5rem;
     font-weight: 600;
+    border: none;
 }
 
 .reset-button:hover {
@@ -109,23 +109,25 @@
 }
 
 
-@media (min-width: 1px)  {
+@media (min-width: 1px) {
     .game-card {
         grid-template-columns: 1fr;
     }
 }
 
-@media (min-width: 952px)  {
+@media (min-width: 952px) {
     .game-card {
         grid-template-columns: 1fr 1fr;
     }
 }
-@media (min-width: 1430px)  {
+
+@media (min-width: 1430px) {
     .game-card {
         grid-template-columns: 1fr 1fr 1fr;
     }
 }
-@media (min-width: 1900px)  {
+
+@media (min-width: 1900px) {
     .game-card {
         grid-template-columns: 1fr 1fr 1fr 1fr;
     }
@@ -175,8 +177,8 @@
         justify-content: center;
     }
 
-    .btn-wrapper{
-        gap:1rem
+    .btn-wrapper {
+        gap: 1rem
     }
 
 }
