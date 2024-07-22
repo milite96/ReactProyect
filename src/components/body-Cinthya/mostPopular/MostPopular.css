@@ -23,12 +23,15 @@
 .most-card-group {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     margin: 1rem 6rem;
+
 }
 
 .most-card {
     background-color: var(--fern-green);
     flex: 1 1 calc(25% - 2rem);
+    max-width: 20rem;
     /* Default: 4 columns */
 }
 
