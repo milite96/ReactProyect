@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import GameCard from "./GameCard";
-import useFetchFree from "../../components/Fetch-freeToGame/useFetchFree";
-import "../home-body/GameSearch.css";
-import BasicDropdown from "../../components-victor/dropdown/BasicDropdown";
+import GameCard from "../gameCard/GameCard"
+import useFetchFree from "../../Fetch-freeToGame/useFetchFree";
+import "./GameSearch.css";
+import BasicDropdown from "../../../components-victor/dropdown/BasicDropdown";
 
 function GameSearch() {
   const { data = [], error, isLoading } = useFetchFree(); // Ensure data is always an array

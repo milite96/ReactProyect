@@ -1,4 +1,4 @@
-import '../home-body/GameCard.css'
+import './GameCard.css'
 const GameCard = ({ game }) => {
   return (
     <div className="game-card-style">
