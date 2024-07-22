@@ -40,22 +40,82 @@ export const json = {
       "elements": [
        {
         "type": "tagbox",
-        "name": "genre",
+        "name": "selectedGenres",
         "title": "Select your favorite game's genre",
         "isRequired": true,
         "choices": [
          {
-          "value": "Shooter",
-          "text": "Shooter"
+          "value": "ARPG",
+          "text": "ARPG"
          },
          {
-          "value": "MOBA",
-          "text": "MOBA"
+          "value": "Action",
+          "text": "Action"
          },
          {
-          "value": "Racing",
-          "text": "Racing"
-         }
+          "value": "Action Game",
+          "text": "Action Game"
+         },
+         {
+            "value": "Action RPG",
+            "text": "Action RPG"
+           },
+           {
+            "value": "Battle Royale",
+            "text": "Battle Royale"
+           },
+           {
+            "value": "Card",
+            "text": "Card"
+           },
+           {
+            "value": "Card Game",
+            "text": "Card Game"
+           },
+           {
+            "value": "Fantasy",
+            "text": "Fantasy"
+           },
+           {
+            "value": "Fighting",
+            "text": "Fighting"
+           },
+           {
+            "value": "MMO",
+            "text": "MMO"
+           },
+           {
+            "value": "MMOARPG",
+            "text": "MMOARPG"
+           },
+           {
+            "value": "MMORPG",
+            "text": "MMORPG"
+           },
+           {
+            "value": "MOBA",
+            "text": "MOBA"
+           },
+           {
+            "value": "Racing",
+            "text": "Racing"
+           },
+           {
+            "value": "Shooter",
+            "text": "Shooter"
+           },
+           {
+            "value": "Social",
+            "text": "Social"
+           },
+           {
+            "value": "Sports",
+            "text": "Sports"
+           },
+           {
+            "value": "Strategy",
+            "text": "Strategy"
+           }
         ]
        }
       ]
@@ -65,7 +125,7 @@ export const json = {
       "elements": [
        {
         "type": "radiogroup",
-        "name": "question3",
+        "name": "platform",
         "title": "Which do you prefer to play games on?",
         "isRequired": true,
         "choices": [
@@ -97,7 +157,7 @@ export const json = {
       "elements": [
        {
         "type": "radiogroup",
-        "name": "question5",
+        "name": "preferenceRelease",
         "title": "I prefer playing...",
         "isRequired": true,
         "choices": [

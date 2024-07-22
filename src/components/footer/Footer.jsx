@@ -23,7 +23,6 @@ function Footer() {
                   <div className='button-container'>
                     <a href="https://github.com/ciincin" target="_blank" rel="noopener noreferrer"><button className='most-see-more-btn'> ciincin </button></a>
                     <a href="https://github.com/milite96" target="_blank" rel="noopener noreferrer"><button className='most-see-more-btn'> milite96 </button></a>
-                    <a href="https://github.com/r-lucena" target="_blank" rel="noopener noreferrer"><button className='most-see-more-btn'> r-lucena </button></a>
                   </div>
                 </Accordion.Body>
               </Accordion.Item>
@@ -33,7 +32,6 @@ function Footer() {
                   <div className="button-container">
                     <a href="https://www.linkedin.com/in/cinthyars/" target="_blank" rel="noopener noreferrer"><button className='most-see-more-btn'> cinthyars </button></a>
                     <a href="https://www.linkedin.com/in/milite96/" target="_blank" rel="noopener noreferrer"><button className='most-see-more-btn'> milite96 </button></a>
-                    <a href="https://www.linkedin.com/in/r-lucena/" target="_blank" rel="noopener noreferrer"><button className='most-see-more-btn'> r-lucena </button></a>
                   </div>
                 </Accordion.Body>
               </Accordion.Item>

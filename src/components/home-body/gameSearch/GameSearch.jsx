@@ -29,7 +29,7 @@ function GameSearch() {
   }
 
   function handlePage(event) {
-    setPage(Number(event.target.innerText)-1);
+    setPage(Number(event.target.innerText) - 1);
   }
 
   function generateRandomGames() {
@@ -40,8 +40,8 @@ function GameSearch() {
   function populateDropdown() {
     if (data.length > 0) {
       const differentGenres = [...new Set(data.map((game) => game.genre))]; // Extraer géneros únicos
-
-      const filterDifferentGenres = differentGenres.map((genre) => ({
+      const OrderedGenres = differentGenres.sort().slice(1, 19);
+      const filterDifferentGenres = OrderedGenres.map((genre) => ({
         item: genre,
         value: genre.toLowerCase(),
       })); // Formatear géneros
@@ -92,7 +92,7 @@ function GameSearch() {
     const pagination = divideArrayInParts(filteredGames, 12);
     setSearchResults(pagination);
 
-    const arrayOfPages = Array.from({ length: pagination.length}, (_, i) => i+1);
+    const arrayOfPages = Array.from({ length: pagination.length }, (_, i) => i + 1);
     setNumOfPages(arrayOfPages);
     setPage(0); // Reset to the first page on new search
   }, [searchQuery, selectedGenre, data]); // Depende de searchQuery y data
@@ -157,12 +157,12 @@ function GameSearch() {
       </div>
       <div className="page-btn-wrapper">
         {numOfPages.map((page, index) => {
-            return (
-                <button className="page-btn" onClick={handlePage} key={index} >
-                  {page}
-                </button>
-            );
-          })}
+          return (
+            <button className="page-btn" onClick={handlePage} key={index} >
+              {page}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
