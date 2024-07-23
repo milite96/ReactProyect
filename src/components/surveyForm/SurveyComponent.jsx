@@ -9,6 +9,7 @@ import useFetchFree from "../Fetch-freeToGame/useFetchFree"
 
 import Card from "react-bootstrap/Card";
 import CardGroup from "react-bootstrap/CardGroup";
+import Spinner from 'react-bootstrap/Spinner'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../body-Cinthya/mostPopular/MostPopular.css";
 
@@ -17,6 +18,7 @@ function SurveyComponent() {
   const [isCompleted, setIsCompleted] = useState(false);
   const [surveyModel, setSurveyModel] = useState(null);
   const [filteredGames, setFilteredGames] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { data, loading, error } = useFetchFree()
 
@@ -28,9 +30,14 @@ function SurveyComponent() {
       setSurveyResult(sender.data);
       setIsCompleted(true);
     });
-
     setSurveyModel(survey)
   }, []);
+
+  useEffect(()=> {
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 3000);
+  },[])
 
   useEffect(() => {
     if (isCompleted && data) {
@@ -71,13 +78,17 @@ function SurveyComponent() {
 
   return (
     <div>
-      <div className="survey-wrapper">
-        {surveyModel && <Survey model={surveyModel} />}
+      <div className={isLoading? "spinner-wrapper" : "hidden"}>
+      <Spinner animation="border"/>
+      </div>
+      <div className={isLoading ? "hidden" : ""}>
+        <div className="survey-wrapper">
+          {surveyModel && <Survey model={surveyModel} />}
+        </div>
       </div>
       {isCompleted && (
         <div className="most-div-wrapper">
           <h1 className="most-title">You should try these games:</h1>
-
           <div className="most-card-group-wrapper">
             <CardGroup className="most-card-group">
               {filteredGames &&

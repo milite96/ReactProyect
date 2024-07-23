@@ -13,6 +13,19 @@
 
 }
 
+.hidden{
+    display: none !important;
+}
+
+.spinner-wrapper{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    margin-top: 105px;
+    color: var(--light-green);
+}
+
 .sd-logo__image{
 width: auto;
 margin: 1rem;
