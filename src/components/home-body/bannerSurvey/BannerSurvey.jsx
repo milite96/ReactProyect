@@ -12,7 +12,7 @@ function Encuesta(){
     <div className="banner-survey-wrapper">
       <h2 className="banner-survey-text">Are you tired of playing the same mainstream games?</h2>
       <p className="banner-survey-text">Use our browser to search for your next favourite game!</p>
-      <button onClick={goToSurvey} className="btn-link-survey">Let's go!</button>
+      <button onClick={goToSurvey} className="most-see-more-btn">Let's go!</button>
     </div>
   );
 }

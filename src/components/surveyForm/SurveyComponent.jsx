@@ -5,13 +5,13 @@ import { themeJson } from "./theme";
 import "./SurveyForm.css";
 import { json } from "./json";
 import { useEffect, useState } from "react";
-import useFetchFree from "../Fetch-freeToGame/useFetchFree"
-
+import useFetchFree from "../Fetch-freeToGame/useFetchFree";
 import Card from "react-bootstrap/Card";
 import CardGroup from "react-bootstrap/CardGroup";
-import Spinner from 'react-bootstrap/Spinner'
+import Spinner from "react-bootstrap/Spinner";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../body-Cinthya/mostPopular/MostPopular.css";
+import "../home-body/bannerSurvey/BannerSurvey.css";
 
 function SurveyComponent() {
   const [surveyResult, setSurveyResult] = useState({});
@@ -20,7 +20,11 @@ function SurveyComponent() {
   const [filteredGames, setFilteredGames] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const { data, loading, error } = useFetchFree()
+  const { data, loading, error } = useFetchFree();
+
+  function handleRefreshPage(){
+    window.location.reload()
+  }
 
   useEffect(() => {
     const survey = new Model(json);
@@ -30,14 +34,14 @@ function SurveyComponent() {
       setSurveyResult(sender.data);
       setIsCompleted(true);
     });
-    setSurveyModel(survey)
+    setSurveyModel(survey);
   }, []);
 
-  useEffect(()=> {
+  useEffect(() => {
     setTimeout(() => {
-      setIsLoading(false)
+      setIsLoading(false);
     }, 3000);
-  },[])
+  }, []);
 
   useEffect(() => {
     if (isCompleted && data) {
@@ -45,82 +49,109 @@ function SurveyComponent() {
       let filteredGamesByGenre = [];
       let filteredGamesByPlatform = [];
       let filteredGamesByReleaseDate = [];
-      genresToFilter.forEach(selectedGenre => {
-        const filteredData = data.filter(game => game.genre === selectedGenre);
+      genresToFilter.forEach((selectedGenre) => {
+        const filteredData = data.filter(
+          (game) => game.genre === selectedGenre
+        );
         filteredGamesByGenre = [...filteredGamesByGenre, ...filteredData];
-      })
-      const platformToFilter = surveyResult.platform
+      });
+      const platformToFilter = surveyResult.platform;
       if (platformToFilter === "Web Browser") {
-        filteredGamesByPlatform = filteredGamesByGenre.filter(game => game.platform === platformToFilter);
+        filteredGamesByPlatform = filteredGamesByGenre.filter(
+          (game) => game.platform === platformToFilter
+        );
       } else {
-        filteredGamesByPlatform = filteredGamesByGenre.filter(game => game.platform == platformToFilter);
+        filteredGamesByPlatform = filteredGamesByGenre.filter(
+          (game) => game.platform == platformToFilter
+        );
       }
-      const releaseDateFilter = surveyResult.preferenceRelease
+      const releaseDateFilter = surveyResult.preferenceRelease;
       if (releaseDateFilter === "Old games") {
-        filteredGamesByReleaseDate = filteredGamesByPlatform.sort((a, b) => new Date(a.release_date) - new Date(b.release_date))
+        filteredGamesByReleaseDate = filteredGamesByPlatform.sort(
+          (a, b) => new Date(a.release_date) - new Date(b.release_date)
+        );
       } else if (releaseDateFilter === "New games") {
-        filteredGamesByReleaseDate = filteredGamesByPlatform.sort((a, b) => new Date(b.release_date) - new Date(a.release_date))
+        filteredGamesByReleaseDate = filteredGamesByPlatform.sort(
+          (a, b) => new Date(b.release_date) - new Date(a.release_date)
+        );
       } else {
-        filteredGamesByReleaseDate = filteredGamesByPlatform.sort(() => Math.random() - 0.5)
+        filteredGamesByReleaseDate = filteredGamesByPlatform.sort(
+          () => Math.random() - 0.5
+        );
       }
       if (filteredGamesByReleaseDate.length > 4) {
-        const resultGames = filteredGamesByReleaseDate.slice(0, 5)
+        const resultGames = filteredGamesByReleaseDate.slice(0, 5);
         setFilteredGames(resultGames);
       } else {
-        setFilteredGames(filteredGamesByReleaseDate)
+        setFilteredGames(filteredGamesByReleaseDate);
       }
     }
-  }, [isCompleted, surveyResult, data])
+  }, [isCompleted, surveyResult, data]);
 
   useEffect(() => {
     console.log(filteredGames);
-  }, [filteredGames])
+  }, [filteredGames]);
 
   return (
     <div>
-      <div className={isLoading? "spinner-wrapper" : "hidden"}>
-      <Spinner animation="border"/>
+      <div className={isLoading ? "spinner-wrapper" : "hidden"}>
+        <Spinner animation="border" />
       </div>
       <div className={isLoading ? "hidden" : ""}>
         <div className="survey-wrapper">
           {surveyModel && <Survey model={surveyModel} />}
         </div>
       </div>
-      {isCompleted && (
+      {isCompleted && filteredGames.length > 0 && (
         <div className="most-div-wrapper">
           <h1 className="most-title">You should try these games:</h1>
           <div className="most-card-group-wrapper">
             <CardGroup className="most-card-group">
-              {filteredGames &&
-                filteredGames.map((game) => (
-                  <Card className="most-card" key={game.id}>
-                    <Card.Img
-                      variant="top"
-                      src={game.thumbnail}
-                    />
-                    <Card.Body>
-                      <Card.Title className="most-card-title">{game.title}</Card.Title>
-                      <Card.Text className="most-card-text">{game.short_description} </Card.Text>
-                    </Card.Body>
-                    <div className="most-div-flex">
-                      <button
-                        className="most-see-more-btn"
-                        onClick={() => window.open(game.game_url)}
-                      >
-                        See more
-                      </button>
-                    </div>
-                    <Card.Footer>
-                      <small className="most-text-muted">
-                        Release date: {game.release_date}
-                      </small>
-                    </Card.Footer>
-                  </Card>
-                ))}
+              {filteredGames.map((game) => (
+                <Card className="most-card" key={game.id}>
+                  <Card.Img variant="top" src={game.thumbnail} />
+                  <Card.Body>
+                    <Card.Title className="most-card-title">
+                      {game.title}
+                    </Card.Title>
+                    <Card.Text className="most-card-text">
+                      {game.short_description}{" "}
+                    </Card.Text>
+                  </Card.Body>
+                  <div className="most-div-flex">
+                    <button
+                      className="most-see-more-btn"
+                      onClick={() => window.open(game.game_url)}
+                    >
+                      See more
+                    </button>
+                  </div>
+                  <Card.Footer>
+                    <small className="most-text-muted">
+                      Release date: {game.release_date}
+                    </small>
+                  </Card.Footer>
+                </Card>
+              ))}
             </CardGroup>
           </div>
         </div>
       )}
+
+      {isCompleted && filteredGames.length==0 && (
+        <div className="no-games-found-wrapper">
+          <h2 className="survey-no-found">
+            No games found within your preferences. Please, try the survey again
+          </h2>
+          <h4 className="survey-no-found-explanation">
+            Remember: web browser games are not as popular as PC download games
+          </h4>
+          <button onClick={handleRefreshPage} className="btn-link-survey">
+            Try again
+          </button>
+        </div>
+      )}
+
     </div>
   );
 }

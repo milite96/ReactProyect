@@ -46,7 +46,7 @@
 
 .reset-button {
     align-self: center;
-    background-color: var(--old-gold);
+    background-color: var(--aureolin);
     color: var(--davys-gray);
     padding: 6px 20px;
     border-radius: 0.5rem;
@@ -55,7 +55,7 @@
 }
 
 .reset-button:hover {
-    background-color: var(--moss-green);
+    background-color: var(--old-gold);
     color: white;
 }
 
@@ -85,15 +85,15 @@
 
 .page-btn {
     width: 30px;
-    background-color: var(--light-green);
-    color: var(--davys-gray);
+    background-color: var(--fern-green);
+    color: white;
     font-weight: 600;
     border: none;
     border-radius: 0.4rem;
 }
 
 .page-btn:hover {
-    background-color: var(--moss-green);
+    background-color: var(--emerald-2);
     color: white;
 }
 

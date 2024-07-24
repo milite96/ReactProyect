@@ -13,7 +13,7 @@ export const themeJson = {
     "--sjs-corner-radius": "10px",
     "--sjs-base-unit": "8px",
     "--sjs-font-pagetitle-family": "Quicksand, sans-serif",
-    "--sjs-font-pagetitle-color": "rgba(91, 230, 121, 1)",
+    "--sjs-font-pagetitle-color": "rgba(238, 232, 44,1)",
     "--sjs-font-pagedescription-family": "Quicksand, sans-serif",
     "--sjs-shadow-small": "0px 2px 0px 2px rgba(64, 64, 64, 1), 0px 0px 0px 2px rgba(64, 64, 64, 1)",
     "--sjs-font-questiontitle-family": "Quicksand, sans-serif",

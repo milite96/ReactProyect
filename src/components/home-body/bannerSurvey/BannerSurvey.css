@@ -10,20 +10,6 @@
     color: white;
   }
 
-  .btn-link-survey {
-    border-radius: 0.75rem;
-    border: none;
-    box-shadow: 2px 2px 5px var(--davys-gray);
-    background-color: var(--old-gold);
-    width: 8rem;
-    height: 2rem;
-    color: var(--davys-gray);
-    font-weight: 600;
-}
-.btn-link-survey:hover{
-    background-color: var( --moss-green);
-    color: white;
-}
 .banner-survey-text {
     background-color: var(--fern-green);
 }

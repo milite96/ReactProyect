@@ -31,13 +31,21 @@ margin: 1rem;
 }
 
 .sd-root-modern__wrapper{
-    padding-bottom: 4rem;
+    padding-bottom: 1rem;
 }
 
-.survey-result{
-    color: white;
+.survey-no-found{
+    color: var(--light-green);
+}
+.survey-no-found-explanation{
+    color: var(--light-green);
+    margin-bottom: 1rem;
 }
 
+.no-games-found-wrapper{
+   text-align: center;
+   margin-bottom: 4rem;
+}
 
 /* Tablet view */
 @media (max-width: 1340px) {
