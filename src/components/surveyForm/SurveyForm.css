@@ -5,9 +5,7 @@
 }
 
 
-.sv-header__title{
 
-}
 
 .sv-header__description{
 
@@ -61,6 +59,10 @@ margin: 1rem;
     .sv-header__cell-content{
         max-width: 600px;
        }
+
+       .sd-title, .sd-description{
+        text-align: left;
+        }
 }
 
 @media (max-width: 960px) {
@@ -68,5 +70,12 @@ margin: 1rem;
     .sv-header__cell-content{
         max-width: 500px;
        }
+
+       .sd-title, .sd-description{
+        text-align: center;
+        }
+        .sv-title-actions{
+            text-align: left;
+        }
 }
 
