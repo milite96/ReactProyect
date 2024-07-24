@@ -6,9 +6,9 @@ import "./SurveyForm.css";
 import { json } from "./json";
 import { useEffect, useState } from "react";
 import useFetchFree from "../Fetch-freeToGame/useFetchFree"
+import GameCard from "../home-body/gameCard/GameCard";
 
-import Card from "react-bootstrap/Card";
-import CardGroup from "react-bootstrap/CardGroup";
+
 import Spinner from 'react-bootstrap/Spinner'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../body-Cinthya/mostPopular/MostPopular.css";
@@ -19,6 +19,9 @@ function SurveyComponent() {
   const [surveyModel, setSurveyModel] = useState(null);
   const [filteredGames, setFilteredGames] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [genresFromSurvey, setGenresFromSurvey] = useState([]);
+  const [testArray, setTestArray] = useState([]);
+  const [nonRepeatedGamesArray, setNonRepeatedGamesArray] = useState([]);
 
   const { data, loading, error } = useFetchFree()
 
@@ -63,18 +66,50 @@ function SurveyComponent() {
       } else {
         filteredGamesByReleaseDate = filteredGamesByPlatform.sort(() => Math.random() - 0.5)
       }
-      if (filteredGamesByReleaseDate.length > 4) {
-        const resultGames = filteredGamesByReleaseDate.slice(0, 5)
-        setFilteredGames(resultGames);
-      } else {
+      setTestArray(filteredGamesByReleaseDate);
+      const differentGenres = [...new Set(filteredGamesByReleaseDate.map((game) => game.genre))]
+      let slicedArray = [];
+      differentGenres.forEach(uniqueGenre => {
+      slicedArray = [...slicedArray, ...(filteredGamesByReleaseDate.filter((game) => game.genre === uniqueGenre)).slice(0,1)]
+      })
+      setGenresFromSurvey(differentGenres)
+
+      if(differentGenres.length > 1 && differentGenres.length < 8 && filteredGamesByReleaseDate.length > 8){
+        // displayedArray =  [...slicedArray, ...(filteredGamesByReleaseDate.sort(() => Math.random() - 0.5))]
+        // displayedArray.slice(0, (8 - genresFromSurvey.length))
+        const idsToRemove = new Set(slicedArray.map(slicedGame => slicedGame.id));
+        const filteredArray = filteredGamesByReleaseDate.filter(game => !idsToRemove.has(game.id))
+        setNonRepeatedGamesArray(filteredArray);
+        setFilteredGames([...slicedArray, ...filteredArray.slice(0, (8 - slicedArray.length))])
+      } else if (differentGenres.length === 1){
+        setFilteredGames(filteredGamesByReleaseDate.slice(0,8))
+      } else if (differentGenres.length > 1 && filteredGamesByReleaseDate.length <= 8){
         setFilteredGames(filteredGamesByReleaseDate)
+      } else {
+        setFilteredGames(slicedArray)
       }
+        
+
+      
     }
   }, [isCompleted, surveyResult, data])
 
   useEffect(() => {
-    console.log(filteredGames);
+    console.log("selected genres:", genresFromSurvey);
+  }, [genresFromSurvey])
+
+  useEffect(() => {
+    console.log("all filtered games:", testArray);
+  }, [testArray])
+
+  useEffect(() => {
+    console.log("array with no repeated games:", nonRepeatedGamesArray);
+  }, [nonRepeatedGamesArray])
+
+  useEffect(() => {
+    console.log("printed games:", filteredGames);
   }, [filteredGames])
+
 
   return (
     <div>
@@ -89,35 +124,11 @@ function SurveyComponent() {
       {isCompleted && (
         <div className="most-div-wrapper">
           <h1 className="most-title">You should try these games:</h1>
-          <div className="most-card-group-wrapper">
-            <CardGroup className="most-card-group">
+          <div className="game-card">
               {filteredGames &&
                 filteredGames.map((game) => (
-                  <Card className="most-card" key={game.id}>
-                    <Card.Img
-                      variant="top"
-                      src={game.thumbnail}
-                    />
-                    <Card.Body>
-                      <Card.Title className="most-card-title">{game.title}</Card.Title>
-                      <Card.Text className="most-card-text">{game.short_description} </Card.Text>
-                    </Card.Body>
-                    <div className="most-div-flex">
-                      <button
-                        className="most-see-more-btn"
-                        onClick={() => window.open(game.game_url)}
-                      >
-                        See more
-                      </button>
-                    </div>
-                    <Card.Footer>
-                      <small className="most-text-muted">
-                        Release date: {game.release_date}
-                      </small>
-                    </Card.Footer>
-                  </Card>
+                  <GameCard key={game.id} game={game} />
                 ))}
-            </CardGroup>
           </div>
         </div>
       )}
