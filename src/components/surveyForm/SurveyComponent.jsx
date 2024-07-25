@@ -125,15 +125,18 @@ function SurveyComponent() {
           {surveyModel && <Survey model={surveyModel} />}
         </div>
       </div>
-      {isCompleted && (
+      {isCompleted &&  filteredGames.length > 0 && (
         <div className="most-div-wrapper">
           <h1 className="most-title">You should try these games:</h1>
-          <div className="game-card">
+          <div className="game-card-wrapper">
             {filteredGames &&
               filteredGames.map((game) => (
                 <GameCard key={game.id} game={game} />
               ))}
           </div>
+          <button onClick={handleRefreshPage} className="most-see-more-btn">
+            Try again
+          </button>
         </div>
       )}
 
@@ -145,7 +148,7 @@ function SurveyComponent() {
           <h4 className="survey-no-found-explanation">
             Remember: web browser games are not as popular as PC download games
           </h4>
-          <button onClick={handleRefreshPage} className="btn-link-survey">
+          <button onClick={handleRefreshPage} className="most-see-more-btn">
             Try again
           </button>
         </div>

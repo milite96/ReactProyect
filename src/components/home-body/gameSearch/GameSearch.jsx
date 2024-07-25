@@ -142,7 +142,7 @@ function GameSearch() {
           </div>
         </div>
       </div>
-      <div className="game-card">
+      <div className="game-card-wrapper">
         {searchQuery || selectedGenre ? (
           searchResults.length ? (
             searchResults[page].map((game) => (

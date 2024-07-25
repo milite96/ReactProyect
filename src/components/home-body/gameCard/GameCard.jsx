@@ -1,5 +1,6 @@
 import './GameCard.css'
-const GameCard = ({ game }) => {
+
+function GameCard({ game }){
   return (
     <div className="game-card-style">
     <div className="img-container">
