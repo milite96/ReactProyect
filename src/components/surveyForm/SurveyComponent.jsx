@@ -18,7 +18,7 @@ function SurveyComponent() {
   const [isCompleted, setIsCompleted] = useState(false);
   const [surveyModel, setSurveyModel] = useState(null);
   const [filteredGames, setFilteredGames] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [genresFromSurvey, setGenresFromSurvey] = useState([]);
   const [testArray, setTestArray] = useState([]);
   const [nonRepeatedGamesArray, setNonRepeatedGamesArray] = useState([]);
@@ -40,11 +40,11 @@ function SurveyComponent() {
     setSurveyModel(survey)
   }, []);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 3000);
-  }, [])
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setIsLoading(false)
+  //   }, 3000);
+  // }, [])
 
   useEffect(() => {
     if (isCompleted && data) {
