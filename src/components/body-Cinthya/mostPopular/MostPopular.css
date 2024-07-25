@@ -59,7 +59,7 @@
     border-radius: 0.75rem;
     border: none;
     box-shadow: 2px 2px 5px var(--davys-gray);
-    background-color: var(--old-gold);
+    background-color: var(--aureolin);
     width: 8rem;
     height: 2rem;
     color: var(--davys-gray);
@@ -67,7 +67,7 @@
 }
 
 .most-see-more-btn:hover {
-    background-color: var(--moss-green);
+    background-color: var(--old-gold);
     color: white;
 }
 

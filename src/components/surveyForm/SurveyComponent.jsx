@@ -25,6 +25,10 @@ function SurveyComponent() {
 
   const { data, loading, error } = useFetchFree()
 
+  function handleRefreshPage(){
+    window.location.reload()
+  }
+
   useEffect(() => {
     const survey = new Model(json);
     survey.applyTheme(themeJson);
@@ -36,11 +40,11 @@ function SurveyComponent() {
     setSurveyModel(survey)
   }, []);
 
-  useEffect(()=> {
+  useEffect(() => {
     setTimeout(() => {
       setIsLoading(false)
     }, 3000);
-  },[])
+  }, [])
 
   useEffect(() => {
     if (isCompleted && data) {
@@ -70,27 +74,27 @@ function SurveyComponent() {
       const differentGenres = [...new Set(filteredGamesByReleaseDate.map((game) => game.genre))]
       let slicedArray = [];
       differentGenres.forEach(uniqueGenre => {
-      slicedArray = [...slicedArray, ...(filteredGamesByReleaseDate.filter((game) => game.genre === uniqueGenre)).slice(0,1)]
+        slicedArray = [...slicedArray, ...(filteredGamesByReleaseDate.filter((game) => game.genre === uniqueGenre)).slice(0, 1)]
       })
       setGenresFromSurvey(differentGenres)
 
-      if(differentGenres.length > 1 && differentGenres.length < 8 && filteredGamesByReleaseDate.length > 8){
+      if (differentGenres.length > 1 && differentGenres.length < 8 && filteredGamesByReleaseDate.length > 8) {
         // displayedArray =  [...slicedArray, ...(filteredGamesByReleaseDate.sort(() => Math.random() - 0.5))]
         // displayedArray.slice(0, (8 - genresFromSurvey.length))
         const idsToRemove = new Set(slicedArray.map(slicedGame => slicedGame.id));
         const filteredArray = filteredGamesByReleaseDate.filter(game => !idsToRemove.has(game.id))
         setNonRepeatedGamesArray(filteredArray);
         setFilteredGames([...slicedArray, ...filteredArray.slice(0, (8 - slicedArray.length))])
-      } else if (differentGenres.length === 1){
-        setFilteredGames(filteredGamesByReleaseDate.slice(0,8))
-      } else if (differentGenres.length > 1 && filteredGamesByReleaseDate.length <= 8){
+      } else if (differentGenres.length === 1) {
+        setFilteredGames(filteredGamesByReleaseDate.slice(0, 8))
+      } else if (differentGenres.length > 1 && filteredGamesByReleaseDate.length <= 8) {
         setFilteredGames(filteredGamesByReleaseDate)
       } else {
         setFilteredGames(slicedArray)
       }
-        
 
-      
+
+
     }
   }, [isCompleted, surveyResult, data])
 
@@ -113,8 +117,8 @@ function SurveyComponent() {
 
   return (
     <div>
-      <div className={isLoading? "spinner-wrapper" : "hidden"}>
-      <Spinner animation="border"/>
+      <div className={isLoading ? "spinner-wrapper" : "hidden"}>
+        <Spinner animation="border" />
       </div>
       <div className={isLoading ? "hidden" : ""}>
         <div className="survey-wrapper">
@@ -125,11 +129,25 @@ function SurveyComponent() {
         <div className="most-div-wrapper">
           <h1 className="most-title">You should try these games:</h1>
           <div className="game-card">
-              {filteredGames &&
-                filteredGames.map((game) => (
-                  <GameCard key={game.id} game={game} />
-                ))}
+            {filteredGames &&
+              filteredGames.map((game) => (
+                <GameCard key={game.id} game={game} />
+              ))}
           </div>
+        </div>
+      )}
+
+      {isCompleted && filteredGames.length == 0 && (
+        <div className="no-games-found-wrapper">
+          <h2 className="survey-no-found">
+            No games found within your preferences. Please, try the survey again
+          </h2>
+          <h4 className="survey-no-found-explanation">
+            Remember: web browser games are not as popular as PC download games
+          </h4>
+          <button onClick={handleRefreshPage} className="btn-link-survey">
+            Try again
+          </button>
         </div>
       )}
     </div>

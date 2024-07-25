@@ -5,7 +5,7 @@ export const json = {
     "logoWidth": "500px",
     "logoHeight": "300px",
     "logoPosition": "right",
-    "completedHtml": "<h3>Thank you for completing the survey, we are selecting the right free to play video games for you...</h3>",
+    "completedHtml": "<h3>Thank you for completing the survey !</h3>",
     "pages": [
      {
       "name": "page1",
