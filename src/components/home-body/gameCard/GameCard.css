@@ -9,6 +9,7 @@
   border-radius: 15px;
   background-color: var(--fern-green);
   width: 100%;
+  max-width: 407px;
   padding-bottom: 3%;
   overflow: hidden;
 }
@@ -34,16 +35,12 @@
   cursor: pointer;
 }
 
-/* .game-card-style .img-container img:hover {
-  padding-bottom: 1rem;
-} */
-
 .game-card-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  height: 250px;
+  height: 260px;
   padding: 0 0.75rem;
   color: white;
 }
@@ -76,21 +73,33 @@
 
 .game-card-description p {
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 14px;
   text-align: center;
+}
+
+
+.info-wrapper{
+  display: flex;
+  flex-direction: column;
+ margin-top: auto;
+}
+.genre-platform-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .game-card-genre {
   display: flex;
-  width: 100%;
+
   height: auto;
-  padding: 0 1rem;
   justify-content: center;
   align-items: center;
-  margin-bottom: 0.5rem;
+
 }
 
 .game-card-genre p {
-  font-weight: 500;
-  font-size: 1rem;
+  font-weight: 400;
+  font-size: 14px;
 }

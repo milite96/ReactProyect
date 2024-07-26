@@ -126,6 +126,10 @@ function GameSearch() {
     console.log(genres);
   }, [genres]);
 
+  useEffect(() => {
+    console.log(numOfPages);
+  }, [numOfPages]);
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -174,7 +178,7 @@ function GameSearch() {
       </div>
       <div className="game-card-wrapper">
         {searchQuery || selectedGenre || selectedSort ? (
-          searchResults.length ? (
+          searchResults.length  ? (
             searchResults[page].map((game) => (
               <GameCard key={game.id} game={game} />
             ))
@@ -186,13 +190,14 @@ function GameSearch() {
         )}
       </div>
       <div className="page-btn-wrapper">
-        {numOfPages.map((page, index) => {
-          return (
-            <button className="page-btn" onClick={handlePage} key={index}>
-              {page}
-            </button>
-          );
-        })}
+        {numOfPages.length > 0 && (selectedGenre.length > 0 || selectedSort.lenght > 0 || searchQuery.length > 0) && (
+            numOfPages.map((page, index) => {
+              return (
+                <button className="page-btn" onClick={handlePage} key={index}>
+                  {page}
+                </button>
+              );
+            }))}
       </div>
     </div>
   );
