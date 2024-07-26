@@ -62,6 +62,7 @@
   height: auto;
   position: relative;
   z-index: 2;
+  cursor: pointer;
   /* Ensure it's on top of the background but below the text */
 }
 

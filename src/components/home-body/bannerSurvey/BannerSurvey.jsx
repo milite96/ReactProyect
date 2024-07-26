@@ -10,8 +10,8 @@ function Encuesta(){
   }
   return (
     <div className="banner-survey-wrapper">
-      <h2 className="banner-survey-text">Are you tired of playing the same mainstream games?</h2>
-      <p className="banner-survey-text">Use our browser to search for your next favourite game!</p>
+      <h2 className="banner-survey-text">Are you tired of playing the same videogames?</h2>
+      <p className="banner-survey-text-2">Use our game finder to discover your new favourite game!</p>
       <button onClick={goToSurvey} className="most-see-more-btn">Let's go!</button>
     </div>
   );
