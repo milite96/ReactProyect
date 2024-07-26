@@ -20,10 +20,11 @@ function SurveyComponent() {
   const [nonRepeatedGamesArray, setNonRepeatedGamesArray] = useState([]);
   const { data, loading } = useFetchFree();
   const [isLoading, setIsLoading] = useState(true);
+  const [testArray, setTestArray] = useState([]);
 
   const handleRefreshPage = () => window.location.reload();
 
-  function handleSpinner(){
+  function handleSpinner() {
     setIsLoading(true)
     setTimeout(() => {
       setIsLoading(false)
@@ -50,36 +51,68 @@ function SurveyComponent() {
   useEffect(() => {
     if (isCompleted && data) {
       const genresToFilter = surveyResult.selectedGenres;
-      const filteredGamesByGenre = data.filter(game => genresToFilter.includes(game.genre));
-
-      const platformToFilter = surveyResult.platform;
-      const filteredGamesByPlatform = filteredGamesByGenre.filter(game => game.platform === platformToFilter);
-
-      const releaseDateFilter = surveyResult.preferenceRelease;
-      let filteredGamesByReleaseDate;
-      if (releaseDateFilter === "Old games") {
-        filteredGamesByReleaseDate = filteredGamesByPlatform.sort((a, b) => new Date(a.release_date) - new Date(b.release_date));
-      } else if (releaseDateFilter === "New games") {
-        filteredGamesByReleaseDate = filteredGamesByPlatform.sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
+      let filteredGamesByGenre = [];
+      let filteredGamesByPlatform = [];
+      let filteredGamesByReleaseDate = [];
+      genresToFilter.forEach(selectedGenre => {
+        const filteredData = data.filter(game => game.genre === selectedGenre);
+        filteredGamesByGenre = [...filteredGamesByGenre, ...filteredData];
+      })
+      const platformToFilter = surveyResult.platform
+      if (platformToFilter === "Web Browser") {
+        filteredGamesByPlatform = filteredGamesByGenre.filter(game => game.platform === platformToFilter);
       } else {
-        filteredGamesByReleaseDate = filteredGamesByPlatform.sort(() => Math.random() - 0.5);
+        filteredGamesByPlatform = filteredGamesByGenre.filter(game => game.platform == platformToFilter);
       }
-
-      const differentGenres = [...new Set(filteredGamesByReleaseDate.map(game => game.genre))];
-      const slicedArray = differentGenres.flatMap(uniqueGenre => filteredGamesByReleaseDate.filter(game => game.genre === uniqueGenre).slice(0, 1));
-      setGenresFromSurvey(differentGenres);
+      const releaseDateFilter = surveyResult.preferenceRelease
+      if (releaseDateFilter === "Old games") {
+        filteredGamesByReleaseDate = filteredGamesByPlatform.sort((a, b) => new Date(a.release_date) - new Date(b.release_date))
+      } else if (releaseDateFilter === "New games") {
+        filteredGamesByReleaseDate = filteredGamesByPlatform.sort((a, b) => new Date(b.release_date) - new Date(a.release_date))
+      } else {
+        filteredGamesByReleaseDate = filteredGamesByPlatform.sort(() => Math.random() - 0.5)
+      }
+      setTestArray(filteredGamesByReleaseDate);
+      const differentGenres = [...new Set(filteredGamesByReleaseDate.map((game) => game.genre))]
+      let slicedArray = [];
+      differentGenres.forEach(uniqueGenre => {
+        slicedArray = [...slicedArray, ...(filteredGamesByReleaseDate.filter((game) => game.genre === uniqueGenre)).slice(0, 1)]
+      })
+      setGenresFromSurvey(differentGenres)
 
       if (differentGenres.length > 1 && differentGenres.length < 8 && filteredGamesByReleaseDate.length > 8) {
-        const idsToRemove = new Set(slicedArray.map(game => game.id));
-        const filteredArray = filteredGamesByReleaseDate.filter(game => !idsToRemove.has(game.id));
+        // displayedArray =  [...slicedArray, ...(filteredGamesByReleaseDate.sort(() => Math.random() - 0.5))]
+        // displayedArray.slice(0, (8 - genresFromSurvey.length))
+        const idsToRemove = new Set(slicedArray.map(slicedGame => slicedGame.id));
+        const filteredArray = filteredGamesByReleaseDate.filter(game => !idsToRemove.has(game.id))
         setNonRepeatedGamesArray(filteredArray);
-        setFilteredGames([...slicedArray, ...filteredArray.slice(0, 8 - slicedArray.length)]);
+        setFilteredGames([...slicedArray, ...filteredArray.slice(0, (8 - slicedArray.length))])
+      } else if (differentGenres.length === 1) {
+        setFilteredGames(filteredGamesByReleaseDate.slice(0, 8))
+      } else if (differentGenres.length > 1 && filteredGamesByReleaseDate.length <= 8) {
+        setFilteredGames(filteredGamesByReleaseDate)
       } else {
-        setFilteredGames(filteredGamesByReleaseDate.slice(0, 8));
+        setFilteredGames(slicedArray)
       }
       handleSpinner();
     }
   }, [isCompleted, surveyResult, data]);
+
+  useEffect(() => {
+    console.log("selected genres:", genresFromSurvey);
+  }, [genresFromSurvey])
+
+  useEffect(() => {
+    console.log("all filtered games:", testArray);
+  }, [testArray])
+
+  useEffect(() => {
+    console.log("array with no repeated games:", nonRepeatedGamesArray);
+  }, [nonRepeatedGamesArray])
+
+  useEffect(() => {
+    console.log("printed games:", filteredGames);
+  }, [filteredGames])
 
   return (
     <div>
@@ -91,28 +124,33 @@ function SurveyComponent() {
           {surveyModel && !isCompleted && <Survey model={surveyModel} />}
         </div>
         {isCompleted && (
-          <div className={isLoading? "hidden" : "most-div-wrapper"}>
-              <div className={isLoading ? "spinner-wrapper" : "hidden"}>
+          <div className={isLoading ? "hidden" : "most-div-wrapper"}>
+            <div className={isLoading ? "spinner-wrapper" : "hidden"}>
               <Spinner animation="border" />
-              </div>
-            {filteredGames.length > 0 && <h1 className="most-title">You should try these games:</h1>}
-            <div className="game-card">
-              {filteredGames.length > 0 ? (
-                filteredGames.map(game => <GameCard key={game.id} game={game} />)
-              ) : (
-                <div className="no-games-found-wrapper">
-                  <h2 className="survey-no-found">
-                    No games found within your preferences. Please, try the survey again
-                  </h2>
-                  <h4 className="survey-no-found-explanation">
-                    Remember: web browser games are not as popular as PC download games
-                  </h4>
-                  <button onClick={handleRefreshPage} className="most-see-more-btn">
-                    Try again
-                  </button>
-                </div>
-              )}
             </div>
+            {filteredGames.length > 0 ? (
+              <div>
+                <h1 className="most-title">You should try these games:</h1>
+                <div className="game-card-wrapper">
+                  {filteredGames.map(game => <GameCard key={game.id} game={game} />)}
+                </div>
+                <button onClick={handleRefreshPage} className="most-see-more-btn">
+                  Try again
+                </button>
+              </div>
+            ) : (
+              <div className="no-games-found-wrapper">
+                <h2 className="survey-no-found">
+                  No games found within your preferences. Please, try the survey again
+                </h2>
+                <h4 className="survey-no-found-explanation">
+                  Remember: web browser games are not as popular as PC download games
+                </h4>
+                <button onClick={handleRefreshPage} className="most-see-more-btn">
+                  Try again
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>

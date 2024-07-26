@@ -9,6 +9,7 @@
   border-radius: 15px;
   background-color: var(--fern-green);
   width: 100%;
+  max-width: 405px;
   padding-bottom: 3%;
   overflow: hidden;
 }
@@ -16,34 +17,39 @@
 .game-card-style .img-container {
   margin: 0;
   width: 100%;
-  height: 300px; /* Set the height of the image container to avoid re-sizing. If needed, adjust on smaller resolutions */
-  overflow: hidden; /* Hide overflowing content */
+  height: 200px;
+  /* Set the height of the image container to avoid re-sizing. If needed, adjust on smaller resolutions */
+  overflow: hidden;
+  /* Hide overflowing content */
 }
 
-.game-card-style .img-container img{
+.game-card-style .img-container img {
   width: 100%;
+  height: 200px;
   transition: all ease-in-out 0.3s;
 }
 
-.game-card-style .img-container img:hover{
-transform: scale(1.1);
-cursor: pointer;
+.game-card-style .img-container img:hover {
+  width: 100%;
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
-.game-card-style .img-container img:hover  {
-  padding-bottom: 1rem;
-}
-.game-card-content{
+.game-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
-  padding: 0 0.5rem;
+  height: 260px;
+  padding: 0 0.75rem;
   color: white;
 }
 
-.game-card-content p{
+.game-card-content p {
   margin: 0;
 }
 
-.card-title{
+.card-title {
   display: inline-block;
   width: 100%;
   margin: 1rem 0;
@@ -57,32 +63,43 @@ cursor: pointer;
   text-shadow: 1px 1px 15px black;
 }
 
-.game-card-description{
+.game-card-description {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100px;
-  padding: 0 0.5rem;
-  margin-bottom: 0.5rem;
+
 }
 
-.game-card-description p{
+.game-card-description p {
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 14px;
   text-align: center;
 }
 
-.game-card-genre{
+
+.info-wrapper{
   display: flex;
-  width: 100%;
-  height: auto;
-  padding: 0 1rem;
+  flex-direction: column;
+ margin-top: auto;
+}
+.genre-platform-wrapper{
+  display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 0.5rem;
+  gap: 0.5rem;
 }
 
-.game-card-genre p{
-  font-weight: 500;
-  font-size: 1rem;
+.game-card-genre {
+  display: flex;
+
+  height: auto;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.game-card-genre p {
+  font-weight: 400;
+  font-size: 14px;
 }

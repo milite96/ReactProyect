@@ -16,14 +16,25 @@ function GameCard({ game }){
             {game.title}
         </h2>
       </div>
-      <div className="game-card-description">
-        <p>{game.short_description}</p>
-      </div>
-      <div className="game-card-genre">
-        <p>Genre: {game.genre}</p>
-      </div>
-      <div className="game-card-genre">
-        <p>Platform: {game.platform}</p>
+
+        <div className="game-card-description">
+          <p>{game.short_description}</p>
+        </div>
+        <div className='info-wrapper'>
+        <div className='genre-platform-wrapper'>
+          <div className="game-card-genre">
+            <p>{game.genre}</p>
+          </div>
+          <div className="game-card-genre">
+            <p>-</p>
+          </div>
+          <div className="game-card-genre">
+            <p>{game.platform}</p>
+          </div>
+        </div>
+        <div className="game-card-genre">
+          <p>Release: {game.release_date}</p>
+        </div>
       </div>
     </div>
 </div>

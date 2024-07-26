@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import GameCard from "../gameCard/GameCard"
+import GameCard from "../gameCard/GameCard";
 import useFetchFree from "../../Fetch-freeToGame/useFetchFree";
 import "./GameSearch.css";
 import BasicDropdown from "../../../components-victor/dropdown/BasicDropdown";
@@ -13,19 +13,32 @@ function GameSearch() {
   const [page, setPage] = useState(0);
   const [numOfPages, setNumOfPages] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState("");
+  const [selectedSort, setSelectedSort] = useState("");
+  const [filteredGames, setFilteredGames] = useState([]);
+
+  const sortByFilter = [
+    { item: "New releases", value: "New releases" },
+    { item: "Legacy games", value: "Legacy games" },
+    { item: "Randomize", value: "Randomize" },
+  ];
 
   function handleSearchQuery(e) {
     setSearchQuery(e.target.value);
   }
 
-  function handleDropdown(e) {
+  function handleDropdownGenre(e) {
     setSelectedGenre(e.target.innerText);
-    console.log(selectedGenre);
+  }
+
+  function handleDropdownSort(e) {
+    setSelectedSort(e.target.innerText);
+    console.log(selectedSort);
   }
 
   function handleReset() {
     setSelectedGenre("");
     setSearchQuery("");
+    setSelectedSort("");
   }
 
   function handlePage(event) {
@@ -49,6 +62,7 @@ function GameSearch() {
       setGenres(filterDifferentGenres);
     }
   }
+
   useEffect(() => {
     if (data.length > 0) {
       console.log("Fetched Data:", data); // Log the fetched data
@@ -57,17 +71,6 @@ function GameSearch() {
       populateDropdown();
     }
   }, [data]);
-
-
-  // useEffect(() => {
-  //   if (selectedGenre) {
-  //     const gamesFilteredByGenre = data.filter(
-  //       (game) => game.genre === selectedGenre
-  //     );
-  //     setFilteredGamesByGenre(gamesFilteredByGenre);
-  //   }
-  //   console.log("Filtered Games:", filteredGamesByGenre);
-  // }, [selectedGenre, data]);
 
   function divideArrayInParts(array, partSize) {
     let result = [];
@@ -79,27 +82,53 @@ function GameSearch() {
   }
 
   useEffect(() => {
-    let filteredGames = [];
+    let filtered = data;
+
     if (searchQuery) {
-      console.log("Search Query:", searchQuery); // Log the search query
-      filteredGames = data.filter((game) =>
+      filtered = data.filter((game) =>
         game.title?.toLowerCase().includes(searchQuery.toLowerCase())
       );
-      console.log("Filtered Games:", filteredGames); // Log the filtered results
-    } else if (selectedGenre) {
-      filteredGames = data.filter((game) => game.genre === selectedGenre);
     }
+
+    if (selectedGenre) {
+      filtered = filtered.filter((game) => game.genre === selectedGenre);
+    }
+
+    if (selectedSort === "New releases") {
+      filtered = filtered.sort(
+        (a, b) => new Date(b.release_date) - new Date(a.release_date)
+      );
+    } else if (selectedSort === "Legacy games") {
+      filtered = filtered.sort(
+        (a, b) => new Date(a.release_date) - new Date(b.release_date)
+      );
+    } else if (selectedSort === "Randomize") {
+      filtered = filtered.sort(() => Math.random() - 0.5);
+    }
+
+    setFilteredGames(filtered);
+  }, [searchQuery, selectedGenre, selectedSort, data]);
+
+  useEffect(() => {
     const pagination = divideArrayInParts(filteredGames, 12);
     setSearchResults(pagination);
 
-    const arrayOfPages = Array.from({ length: pagination.length }, (_, i) => i + 1);
-    setNumOfPages(arrayOfPages);
+    const pages = Array.from({ length: pagination.length }, (_, i) => i + 1);
+    setNumOfPages(pages);
     setPage(0); // Reset to the first page on new search
-  }, [searchQuery, selectedGenre, data]); // Depende de searchQuery y data
+  }, [filteredGames]);
+
+  useEffect(() => {
+    console.log(filteredGames);
+  }, [filteredGames]);
 
   useEffect(() => {
     console.log(genres);
   }, [genres]);
+
+  useEffect(() => {
+    console.log(numOfPages);
+  }, [numOfPages]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -108,8 +137,6 @@ function GameSearch() {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-
-
 
   return (
     <div>
@@ -130,11 +157,18 @@ function GameSearch() {
 
           <div className="btn-wrapper">
             {genres.length ? (
-              <BasicDropdown
-                btnName={"Genres"}
-                objectsArray={genres}
-                handleOnClick={handleDropdown}
-              />
+              <div className="filter-wrapper">
+                <BasicDropdown
+                  btnName={selectedGenre.length > 0 ? selectedGenre : "Genres"}
+                  objectsArray={genres}
+                  handleOnClick={handleDropdownGenre}
+                />
+                <BasicDropdown
+                  btnName={selectedSort.length > 0 ? selectedSort : "Sort by"}
+                  objectsArray={sortByFilter}
+                  handleOnClick={handleDropdownSort}
+                />
+              </div>
             ) : null}
             <button className="reset-button" onClick={handleReset}>
               Reset
@@ -143,8 +177,8 @@ function GameSearch() {
         </div>
       </div>
       <div className="game-card-wrapper">
-        {searchQuery || selectedGenre ? (
-          searchResults.length ? (
+        {searchQuery || selectedGenre || selectedSort ? (
+          searchResults.length  ? (
             searchResults[page].map((game) => (
               <GameCard key={game.id} game={game} />
             ))
@@ -156,13 +190,14 @@ function GameSearch() {
         )}
       </div>
       <div className="page-btn-wrapper">
-        {numOfPages.map((page, index) => {
-          return (
-            <button className="page-btn" onClick={handlePage} key={index} >
-              {page}
-            </button>
-          );
-        })}
+        {numOfPages.length > 0 && (selectedGenre.length > 0 || selectedSort.lenght > 0 || searchQuery.length > 0) && (
+            numOfPages.map((page, index) => {
+              return (
+                <button className="page-btn" onClick={handlePage} key={index}>
+                  {page}
+                </button>
+              );
+            }))}
       </div>
     </div>
   );

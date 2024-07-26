@@ -11,5 +11,12 @@
   }
 
 .banner-survey-text {
-    background-color: var(--fern-green);
+ font-weight: 700;
 }
+
+.banner-survey-text-2 {
+  font-weight: 600;
+  font-size: 20px;
+ }
+
+

@@ -64,7 +64,6 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: max-content;
     border-radius: 20px;
-
 }
 
 .no-found {
@@ -83,6 +82,11 @@
     margin-bottom: 3rem;
 }
 
+.filter-wrapper{
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
 .page-btn {
     width: 30px;
     background-color: var(--fern-green);
@@ -128,7 +132,7 @@
     }
 }
 
-@media (min-width: 1900px) {
+@media (min-width: 1700px) {
     .game-card-wrapper {
         grid-template-columns: 1fr 1fr 1fr 1fr;
     }
