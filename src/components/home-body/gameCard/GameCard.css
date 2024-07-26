@@ -16,8 +16,8 @@
 .game-card-style .img-container {
   margin: 0;
   width: 100%;
-
-
+  height: 300px; /* Set the height of the image container to avoid re-sizing. If needed, adjust on smaller resolutions */
+  overflow: hidden; /* Hide overflowing content */
 }
 
 .game-card-style .img-container img{
@@ -26,7 +26,8 @@
 }
 
 .game-card-style .img-container img:hover{
-transform: scale(1.2);
+transform: scale(1.1);
+cursor: pointer;
 }
 
 .game-card-style .img-container img:hover  {
