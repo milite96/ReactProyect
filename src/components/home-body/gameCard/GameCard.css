@@ -16,34 +16,41 @@
 .game-card-style .img-container {
   margin: 0;
   width: 100%;
-  height: 300px; /* Set the height of the image container to avoid re-sizing. If needed, adjust on smaller resolutions */
-  overflow: hidden; /* Hide overflowing content */
+  height: 200px;
+  /* Set the height of the image container to avoid re-sizing. If needed, adjust on smaller resolutions */
+  overflow: hidden;
+  /* Hide overflowing content */
 }
 
-.game-card-style .img-container img{
+.game-card-style .img-container img {
   width: 100%;
   transition: all ease-in-out 0.3s;
 }
 
-.game-card-style .img-container img:hover{
-transform: scale(1.1);
-cursor: pointer;
+.game-card-style .img-container img:hover {
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
-.game-card-style .img-container img:hover  {
+.game-card-style .img-container img:hover {
   padding-bottom: 1rem;
 }
-.game-card-content{
+
+.game-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
-  padding: 0 0.5rem;
+  height: 270px;
+  padding: 0 0.75rem;
   color: white;
 }
 
-.game-card-content p{
+.game-card-content p {
   margin: 0;
 }
 
-.card-title{
+.card-title {
   display: inline-block;
   width: 100%;
   margin: 1rem 0;
@@ -57,7 +64,7 @@ cursor: pointer;
   text-shadow: 1px 1px 15px black;
 }
 
-.game-card-description{
+.game-card-description {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -66,13 +73,13 @@ cursor: pointer;
   margin-bottom: 0.5rem;
 }
 
-.game-card-description p{
+.game-card-description p {
   font-weight: 700;
   font-size: 0.9rem;
   text-align: center;
 }
 
-.game-card-genre{
+.game-card-genre {
   display: flex;
   width: 100%;
   height: auto;
@@ -82,7 +89,7 @@ cursor: pointer;
   margin-bottom: 0.5rem;
 }
 
-.game-card-genre p{
+.game-card-genre p {
   font-weight: 500;
   font-size: 1rem;
 }
