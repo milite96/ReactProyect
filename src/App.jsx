@@ -9,21 +9,22 @@ import Navbar from "./components-victor/navbar/Navbar"
 
 function App() {
   return (
-    <>
+    <div className="app-container" >
       {/* Component that is common to all VIEWS, this way it doesn't RE-Render each time*/}
-      <Navbar /> 
-
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/survey" element={<SurveyView />} />
-        </Routes>
-      </BrowserRouter>
+      <div className="main-content">
+        <Navbar />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/survey" element={<SurveyView />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
 
       {/* Component that is common to all VIEWS */}
       <Footer />
 
-    </>
+    </div>
   );
 }
 

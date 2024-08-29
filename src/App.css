@@ -1,10 +1,4 @@
 @import url("./index.css");
-/*
-#root {
-  background-color: transparent;
-  text-align: center;
-
-} */
 
 #root {
   /* The image used */
@@ -16,5 +10,6 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 
 
