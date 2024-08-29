@@ -12,10 +12,6 @@ const navbarDropdown = [
     item: "Game finder",
     href: "/survey"
   },
-  {
-    item: "Coming soon",
-    href: "/coming-soon"
-  },
 ]
 
 function Navbar() {
@@ -39,10 +35,6 @@ function Navbar() {
           <li className="navbar-item"><a href="/survey">Game finder</a></li>
         </div>
       </div>
-
-      <ul className="other-links">
-        <li className="navbar-item"><a href="/coming-soon">Coming soon</a></li>
-      </ul>
     </nav>
   );
 };
