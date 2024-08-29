@@ -10,6 +10,7 @@ import GameCard from "../home-body/gameCard/GameCard";
 import Spinner from 'react-bootstrap/Spinner';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../body-Cinthya/mostPopular/MostPopular.css";
+import { PacmanLoader } from "react-spinners";
 
 function SurveyComponent() {
   const [surveyResult, setSurveyResult] = useState({});
@@ -28,7 +29,7 @@ function SurveyComponent() {
     setIsLoading(true)
     setTimeout(() => {
       setIsLoading(false)
-    }, 1000);
+    }, 2500);
   }
 
   useEffect(() => {
@@ -117,7 +118,7 @@ function SurveyComponent() {
   return (
     <div>
       <div className={isLoading ? "spinner-wrapper" : "hidden"}>
-        <Spinner animation="border" />
+      <PacmanLoader color="#eee82c" size={60}/>
       </div>
       <div className={isLoading ? "hidden" : ""}>
         <div className="survey-wrapper">
@@ -131,7 +132,7 @@ function SurveyComponent() {
             {filteredGames.length > 0 ? (
               <div>
                 <h1 className="most-title">You should try these games:</h1>
-                <div className="game-card-wrapper">
+                <div className="survey-games-wrapper">
                   {filteredGames.map(game => <GameCard key={game.id} game={game} />)}
                 </div>
                 <button onClick={handleRefreshPage} className="most-see-more-btn">

@@ -51,4 +51,5 @@ font-style: normal;
 
 .main-content {
   flex: 1;
+  align-content: center;
 }
