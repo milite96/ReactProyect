@@ -1,8 +1,18 @@
+import { useState } from 'react';
 import './GameCard.css'
 
 function GameCard({ game }){
+  const [isExpanded, setIsExpanded] = useState(false)
+  const maxCharacters = 100;
+
+  function toggleReadMore () {
+    setIsExpanded(!isExpanded)
+  }
+
+  const truncatdDescription = game.short_description.length > maxCharacters ? game.short_description.slice(0, maxCharacters) + "...": game.short_description;
+
   return (
-    <div className="game-card-style">
+    <div className={`game-card-style ${isExpanded ? 'expanded' : ''}`}>
     <div className="img-container">
       <img
           src={game.thumbnail}
@@ -18,7 +28,12 @@ function GameCard({ game }){
       </div>
 
         <div className="game-card-description">
-          <p>{game.short_description}</p>
+          <p>{isExpanded? game.short_description : truncatdDescription}</p>
+          {game.short_description.length>maxCharacters && (
+            <button onClick={toggleReadMore} className='read-more-btn'>
+              {isExpanded? "Read less": "Read more"}
+            </button>
+          )}
         </div>
         <div className='info-wrapper'>
         <div className='genre-platform-wrapper'>
