@@ -6,7 +6,6 @@ import BasicDropdown from "../../../components-victor/dropdown/BasicDropdown";
 
 function GameSearch() {
   const { data = [], error, isLoading } = useFetchFree(); // Ensure data is always an array
-  const [randomGames, setRandomGames] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [genres, setGenres] = useState([]);
@@ -45,11 +44,6 @@ function GameSearch() {
     setPage(Number(event.target.innerText) - 1);
   }
 
-  function generateRandomGames() {
-    const randomGames = data.sort(() => Math.random() - 0.5).slice(0, 12);
-    setRandomGames(randomGames);
-  }
-
   function populateDropdown() {
     if (data.length > 0) {
       const differentGenres = [...new Set(data.map((game) => game.genre))]; // Extraer géneros únicos
@@ -67,7 +61,7 @@ function GameSearch() {
     if (data.length > 0) {
       console.log("Fetched Data:", data); // Log the fetched data
 
-      generateRandomGames();
+      //generateRandomGames();
       populateDropdown();
     }
   }, [data]);
@@ -84,29 +78,47 @@ function GameSearch() {
   useEffect(() => {
     let filtered = data;
 
-    if (searchQuery) {
-      filtered = data.filter((game) =>
-        game.title?.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    }
+    if (searchQuery != "" || selectedGenre != "" || selectedSort != "") {
+      // Apply sorting first, independent of genre selection
+      if (selectedSort) {
+        if (selectedSort === "New releases") {
+          console.log("Applying sort - new releases");
+          filtered = [...filtered].sort(
+            (a, b) => new Date(b.release_date) - new Date(a.release_date)
+          );
+        }
 
-    if (selectedGenre) {
-      filtered = filtered.filter((game) => game.genre === selectedGenre);
-    }
+        if (selectedSort === "Legacy games") {
+          console.log("Applying sort - legacy games");
+          filtered = [...filtered].sort(
+            (a, b) => new Date(a.release_date) - new Date(b.release_date)
+          );
+        }
 
-    if (selectedSort === "New releases") {
-      filtered = filtered.sort(
-        (a, b) => new Date(b.release_date) - new Date(a.release_date)
-      );
-    } else if (selectedSort === "Legacy games") {
-      filtered = filtered.sort(
-        (a, b) => new Date(a.release_date) - new Date(b.release_date)
-      );
-    } else if (selectedSort === "Randomize") {
-      filtered = filtered.sort(() => Math.random() - 0.5);
-    }
+        if (selectedSort === "Randomize") {
+          console.log("Applying sort - randomize");
+          filtered = [...filtered].sort(() => Math.random() - 0.5);
+        }
+      }
 
-    setFilteredGames(filtered);
+      // Apply genre filtering after sorting
+      if (selectedGenre) {
+        filtered = filtered.filter((game) => game.genre === selectedGenre);
+      }
+
+      // Apply search query filtering
+      if (searchQuery) {
+        filtered = filtered.filter((game) =>
+          game.title?.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      }
+
+      // Update the filteredGames state
+      setFilteredGames(filtered);
+    } else {
+      filtered = data.sort(() => Math.random() - 0.5).slice(0, 12);
+      setFilteredGames(filtered);
+    }
   }, [searchQuery, selectedGenre, selectedSort, data]);
 
   useEffect(() => {
@@ -159,12 +171,12 @@ function GameSearch() {
             {genres.length ? (
               <div className="filter-wrapper">
                 <BasicDropdown
-                  btnName={selectedGenre.length > 0 ? selectedGenre : "Genres"}
+                  btnName={selectedGenre != "" ? selectedGenre : "Genres"}
                   objectsArray={genres}
                   handleOnClick={handleDropdownGenre}
                 />
                 <BasicDropdown
-                  btnName={selectedSort.length > 0 ? selectedSort : "Sort by"}
+                  btnName={selectedSort != "" ? selectedSort : "Sort by"}
                   objectsArray={sortByFilter}
                   handleOnClick={handleDropdownSort}
                 />
@@ -177,27 +189,24 @@ function GameSearch() {
         </div>
       </div>
       <div className="game-card-wrapper">
-        {searchQuery || selectedGenre || selectedSort ? (
-          searchResults.length  ? (
-            searchResults[page].map((game) => (
-              <GameCard key={game.id} game={game} />
-            ))
-          ) : (
-            <div className="no-found">No results found</div>
-          )
+        {searchResults.length > 0 ? (
+          searchResults[page].map((game) => (
+            <GameCard key={game.id} game={game} />
+          ))
         ) : (
-          randomGames.map((game) => <GameCard key={game.id} game={game} />)
+          <div className="no-found">No results found</div>
         )}
       </div>
       <div className="page-btn-wrapper">
-        {numOfPages.length > 0 && (selectedGenre.length > 0 || selectedSort.lenght > 0 || searchQuery.length > 0) && (
-            numOfPages.map((page, index) => {
-              return (
-                <button className="page-btn" onClick={handlePage} key={index}>
-                  {page}
-                </button>
-              );
-            }))}
+        {numOfPages.length > 0 &&
+          (selectedGenre != "" || selectedSort != "" || searchQuery != "") &&
+          numOfPages.map((page, index) => {
+            return (
+              <button className="page-btn" onClick={handlePage} key={index}>
+                {page}
+              </button>
+            );
+          })}
       </div>
     </div>
   );
