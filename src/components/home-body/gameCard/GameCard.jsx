@@ -3,7 +3,7 @@ import './GameCard.css'
 
 function GameCard({ game }){
   const [isExpanded, setIsExpanded] = useState(false)
-  const maxCharacters = 100;
+  const maxCharacters = 150;
 
   function toggleReadMore () {
     setIsExpanded(!isExpanded)
