@@ -47,8 +47,17 @@ function GameSearch() {
   function populateDropdown() {
     if (data.length > 0) {
       const differentGenres = [...new Set(data.map((game) => game.genre))]; // Extraer géneros únicos
-      const OrderedGenres = differentGenres.sort().slice(1, 19);
-      const filterDifferentGenres = OrderedGenres.map((genre) => ({
+
+      const genreNoAction = differentGenres.filter(
+        (genre) => !genre.includes("Action")
+      );
+
+      const genreNoARPG = genreNoAction.filter((genre)=> genre !== "ARPG")
+
+      genreNoARPG.push("Action Games");
+
+      const orderedGenres = genreNoARPG.sort().slice(1, 19);
+      const filterDifferentGenres = orderedGenres.map((genre) => ({
         item: genre,
         value: genre.toLowerCase(),
       })); // Formatear géneros
@@ -103,7 +112,11 @@ function GameSearch() {
 
       // Apply genre filtering after sorting
       if (selectedGenre) {
-        filtered = filtered.filter((game) => game.genre === selectedGenre);
+        if (selectedGenre == "Action Games") {
+          filtered = filtered.filter((game) => game.genre.includes("Action") || game.genre === "ARPG");
+        } else {
+          filtered = filtered.filter((game) => game.genre === selectedGenre);
+        }
       }
 
       // Apply search query filtering
