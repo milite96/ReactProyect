@@ -29,7 +29,10 @@ function GameSearch() {
     setSearchQuery(e.target.value);
   }
 
-  function handleShowInput(){
+  function handleShowInput() {
+    if (showSearchInput) {
+
+    }
     setShowSearchInput(!showSearchInput)
   }
 
@@ -42,7 +45,7 @@ function GameSearch() {
     console.log(selectedSort);
   }
 
-  function handleRandomize(e){
+  function handleRandomize(e) {
     setSelectedSort("");
     setTimeout(() => {
       setSelectedSort("Randomize")
@@ -93,27 +96,27 @@ function GameSearch() {
   useEffect(() => {
     let filtered = data;
 
-    if (selectedSort === "Randomize"){
+    if (selectedSort === "Randomize") {
       console.log("Applying sort - randomize");
       filtered = [...filtered].sort(() => Math.random() - 0.5);
     }
 
     if (searchQuery != "" || selectedGenre != "") {
       // Apply sorting first, independent of genre selection
-   
-        if (selectedSort === "New releases") {
-          console.log("Applying sort - new releases");
-          filtered = [...filtered].sort(
-            (a, b) => new Date(b.release_date) - new Date(a.release_date)
-          );
-        }
 
-        if (selectedSort === "Legacy games") {
-          console.log("Applying sort - legacy games");
-          filtered = [...filtered].sort(
-            (a, b) => new Date(a.release_date) - new Date(b.release_date)
-          );
-        }
+      if (selectedSort === "New releases") {
+        console.log("Applying sort - new releases");
+        filtered = [...filtered].sort(
+          (a, b) => new Date(b.release_date) - new Date(a.release_date)
+        );
+      }
+
+      if (selectedSort === "Legacy games") {
+        console.log("Applying sort - legacy games");
+        filtered = [...filtered].sort(
+          (a, b) => new Date(a.release_date) - new Date(b.release_date)
+        );
+      }
 
       // Apply genre filtering after sorting
       if (selectedGenre) {
@@ -171,18 +174,21 @@ function GameSearch() {
           <h1 className="search-title">Search your games!</h1>
         </label>
 
-        <div className="funtionalities-wrapper">
-        <img className="search-icon" src={search} onClick={handleShowInput} alt="Search input" title="Search your games!"></img>
-        {showSearchInput && (
-          <input
-            id="game-search"
-            type="text"
-            value={searchQuery}
-            onChange={handleSearchQuery}
-            placeholder="Search for a game..."
-            className="search-input"
-          />
-        )}
+        <div className="functionalities-wrapper">
+          <img className="search-icon" src={search} onClick={handleShowInput} alt="Search input" title="Search your games!"></img>
+
+            <div className={`search-input ${showSearchInput ? 'show' : 'hide'}`}>
+            {showSearchInput && (
+              <input
+                id="game-search"
+                type="text"
+                value={searchQuery}
+                onChange={handleSearchQuery}
+                placeholder="Search for a game..."
+              />
+               )}
+            </div>
+         
 
           <div className="btn-wrapper">
             {genres.length ? (
