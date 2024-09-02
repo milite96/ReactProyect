@@ -60,6 +60,7 @@
     margin-bottom: 4rem;
 }
 
+
 /* Tablet view */
 @media (max-width: 1340px) {
 
@@ -86,25 +87,7 @@
     }
 }
 
-@media (max-width: 867px) {
-
-    .sv-header .sv-header__overlap{
-        height: 500px !important;
-    }
-
-    .sv-header__cell-content {
-
-        max-width: 350px !important;
-    }
-
-
-    .sv-title-actions {
-        text-align: left;
-    }
-
-}
-
-@media (max-width: 960px) {
+@media (max-width: 1024px) {
 
     .sv-header__cell-content {
         max-width: 500px;
@@ -118,4 +101,120 @@
     .sv-title-actions {
         text-align: left;
     }
+
+}
+
+@media (max-width: 768px) {
+
+
+    .sv-header__cell-content {
+        max-width: 350px;
+    }
+
+    .sd-title,
+    .sd-description {
+        text-align: center;
+    }
+
+    .sv-header__title .sd-title {
+        font-size: 2.5rem;
+    }
+
+    .sv-title-actions {
+        text-align: left;
+    }
+}
+
+@media (max-width: 425px) {
+
+    .sv-header__cell-content {
+        max-width: 550px;
+    }
+
+    .sv-header__cell-content {
+        margin-top: 50px;
+        max-width: 350px !important;
+    }
+
+    .sv-title-actions {
+        text-align: left;
+    }
+
+    .sd-logo__image {
+        margin: 0 2.5rem !important;
+    }
+    .spinner-wrapper {
+        display: flex;
+        width: 100%;
+        height: 150px;
+        justify-content: center;
+        align-content: center;
+        margin-top: 105px;
+        padding-top: 1rem ;
+        color: var(--light-green);
+    }
+}
+
+@media (max-width: 375px) {
+
+    .sv-header__cell-content {
+        max-width: 550px;
+    }
+
+    .sv-header__cell-content {
+        margin-top: 50px;
+        max-width: 350px !important;
+    }
+
+    .sv-title-actions {
+        text-align: left;
+    }
+
+    .sd-logo__image {
+        margin: 0 0.5rem !important;
+    }
+    .spinner-wrapper {
+        display: flex;
+        width: 100%;
+        height: 150px;
+        justify-content: center;
+        align-content: center;
+        margin-top: 105px;
+        padding-top: 1rem ;
+        color: var(--light-green);
+    }
+
+}
+
+
+@media (max-width: 320px) {
+
+    .sv-header__cell-content {
+        max-width: 550px;
+    }
+
+    .sv-header__cell-content {
+        margin-top: 50px;
+        max-width: 350px !important;
+    }
+
+    .sv-title-actions {
+        text-align: left;
+    }
+
+    .sd-logo__image {
+        margin: 0 !important;
+    }
+
+    .spinner-wrapper {
+        display: flex;
+        width: 100%;
+        height: 150px;
+        justify-content: center;
+        align-content: center;
+        margin-top: 105px;
+        padding-top: 1rem ;
+        color: var(--light-green);
+    }
+
 }
