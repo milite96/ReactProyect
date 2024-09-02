@@ -105,11 +105,6 @@ function GameSearch() {
   useEffect(() => {
     let filtered = data;
 
-    if (selectedSort === "Randomize") {
-      console.log("Applying sort - randomize");
-      filtered = [...filtered].sort(() => Math.random() - 0.5);
-    }
-
     if (searchQuery != "" || selectedGenre != "") {
       // Apply sorting first, independent of genre selection
 
@@ -118,6 +113,7 @@ function GameSearch() {
         filtered = [...filtered].sort(
           (a, b) => new Date(b.release_date) - new Date(a.release_date)
         );
+        setFilteredGames(filtered);
       }
 
       if (selectedSort === "Legacy games") {
@@ -141,6 +137,12 @@ function GameSearch() {
         filtered = filtered.filter((game) =>
           game.title?.toLowerCase().includes(searchQuery.toLowerCase())
         );
+      }
+
+      if (selectedSort === "Randomize") {
+        console.log("Applying sort - randomize");
+        filtered = [...filtered].sort(() => Math.random() - 0.5);
+        setFilteredGames(filtered);
       }
 
       // Update the filteredGames state
