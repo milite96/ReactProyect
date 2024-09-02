@@ -63,6 +63,7 @@
   padding: 0;
   text-align: center;
   text-shadow: 1px 1px 15px black;
+  cursor: pointer;
 }
 
 .game-card-description {
