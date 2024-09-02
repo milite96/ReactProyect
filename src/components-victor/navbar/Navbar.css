@@ -99,6 +99,8 @@ body {
 .navbar-item a {
   color: #fff;
   text-decoration: none;
+  font-size: 1.5rem;
+  text-shadow: 1px 1px 15px black; ;
   padding: 0.5rem 1rem;
   display: block;
 }
