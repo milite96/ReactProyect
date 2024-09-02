@@ -146,11 +146,11 @@
     .spinner-wrapper {
         display: flex;
         width: 100%;
-        height: 150px;
+        height: 350px;
         justify-content: center;
         align-content: center;
         margin-top: 105px;
-        padding-top: 1rem ;
+        padding-top: 7rem ;
         color: var(--light-green);
     }
 }
@@ -176,11 +176,11 @@
     .spinner-wrapper {
         display: flex;
         width: 100%;
-        height: 150px;
+        height: 350px;
         justify-content: center;
         align-content: center;
         margin-top: 105px;
-        padding-top: 1rem ;
+        padding-top: 6rem ;
         color: var(--light-green);
     }
 
@@ -209,11 +209,11 @@
     .spinner-wrapper {
         display: flex;
         width: 100%;
-        height: 150px;
+        height: 300px;
         justify-content: center;
         align-content: center;
         margin-top: 105px;
-        padding-top: 1rem ;
+        padding-top: 5rem ;
         color: var(--light-green);
     }
 
