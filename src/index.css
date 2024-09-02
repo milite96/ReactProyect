@@ -1,12 +1,12 @@
 :root {
   /* Green palette for components*/
   --light-green: rgb(91, 230, 121);
-  --emerald: rgba(88, 204, 113, 1);
-  --emerald-2: rgba(85, 178, 105, 1);
+  --emerald: rgb(88, 204, 113);
+  --emerald-2: rgb(85, 178, 105);
   --shamrock-green: rgba(83, 152, 98);
   --fern-green: rgba(80, 126, 90);
   --feldgrau: rgba(77, 100, 82, 1);
-  --davys-gray: rgba(74, 74, 74, 1);
+  --davys-gray: rgb(74, 74, 74);
 
   /* Yellow palette for details*/
   --aureolin: rgb(238, 232, 44);
@@ -24,7 +24,7 @@
   --green-yellow: rgba(165, 231, 83, 1);
   --pear: rgba(189, 231, 70, 1);
   --pear-2: rgba(214, 232, 57, 1);
-  --aureolin: rgba(238, 232, 44, 1);
+  --aureolin: rgb(238, 232, 44);
 
 }
 
