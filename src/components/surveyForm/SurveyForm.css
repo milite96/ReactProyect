@@ -1,14 +1,14 @@
 @import url("../../index.css");
 
 .survey-wrapper {
-    margin-top:104px;
+    margin-top: 104px;
 }
 
-.hidden{
+.hidden {
     display: none !important;
 }
 
-.spinner-wrapper{
+.spinner-wrapper {
     display: flex;
     width: 100%;
     height: 100%;
@@ -18,7 +18,7 @@
     color: var(--light-green);
 }
 
-.survey-games-wrapper{
+.survey-games-wrapper {
     display: flex;
     flex-wrap: wrap;
     align-content: center;
@@ -27,69 +27,95 @@
     gap: 3rem;
 }
 
-.sd-logo__image{
-width: auto;
-margin: 1rem;
+.sd-logo__image {
+    width: auto;
+    margin: 1rem;
 }
 
 
-.sd-selectbase{
+.sd-selectbase {
     display: flex;
     flex-direction: column;
     text-align: left;
     margin-left: 1.5rem;
 }
 
-.sd-root-modern__wrapper{
+.sd-root-modern__wrapper {
     padding-bottom: 1rem;
 }
 
-.survey-no-found{
+.survey-no-found {
     color: var(--light-green);
 }
-.survey-no-found-explanation{
+
+.survey-no-found-explanation {
     color: var(--light-green);
     margin-bottom: 1rem;
 }
 
-.no-games-found-wrapper{
-   text-align: center;
-   margin-top: 104px;
-   padding-top: 4rem;
-   margin-bottom: 4rem;
+.no-games-found-wrapper {
+    text-align: center;
+    margin-top: 104px;
+    padding-top: 4rem;
+    margin-bottom: 4rem;
 }
 
 /* Tablet view */
 @media (max-width: 1340px) {
 
-    .sv-header__cell-content{
+    .sv-header__cell-content {
         max-width: 700px;
-       }
+    }
 
 }
 
 @media (max-width: 1090px) {
 
-    .sv-header__cell-content{
+    .sv-header__cell-content {
         max-width: 600px;
-       }
+    }
 
-       .sd-title, .sd-description{
+    .sd-title,
+    .sd-description {
         text-align: left;
-        }
+    }
+
+    .sv-header .sv-header__overlap {
+
+        height: 390px;
+    }
+}
+
+@media (max-width: 867px) {
+
+    .sv-header .sv-header__overlap{
+        height: 500px !important;
+    }
+
+    .sv-header__cell-content {
+
+        max-width: 350px !important;
+    }
+
+
+    .sv-title-actions {
+        text-align: left;
+    }
+
 }
 
 @media (max-width: 960px) {
 
-    .sv-header__cell-content{
+    .sv-header__cell-content {
         max-width: 500px;
-       }
+    }
 
-       .sd-title, .sd-description{
+    .sd-title,
+    .sd-description {
         text-align: center;
-        }
-        .sv-title-actions{
-            text-align: left;
-        }
-}
+    }
 
+    .sv-title-actions {
+        text-align: left;
+    }
+}

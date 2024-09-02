@@ -128,3 +128,23 @@
   font-weight: 400;
   font-size: 14px;
 }
+
+
+/* Tablet view */
+@media (max-width: 875px) {
+
+  .game-card-style{
+    margin: 0 2rem;
+    gap:1.5rem !important;
+  }
+
+}
+
+/* Mobile view */
+@media (max-width: 420px) {
+  .game-card-style{
+    margin: 0 1.5rem;
+    gap:1.5rem !important;
+  }
+
+}

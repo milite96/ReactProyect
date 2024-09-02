@@ -104,30 +104,6 @@
 }
 
 
-@media (min-width: 1px) {
-    .game-card-wrapper {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (min-width: 952px) {
-    .game-card-wrapper {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-@media (min-width: 1430px) {
-    .game-card-wrapper {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-}
-
-@media (min-width: 1700px) {
-    .game-card-wrapper {
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
-}
-
 /* Tablet view */
 @media (max-width: 875px) {
 
